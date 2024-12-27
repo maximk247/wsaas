@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Захват камеры</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #preview {
+        margin-top: 20px;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Сделайте снимок с камеры</h1>
+    <input
+      type="file"
+      accept="image/*"
+      capture="user"
+      id="cameraInput"
+    />
+    <img id="preview" src="" alt="Предпросмотр изображения" />
+
+    <script>
+      const cameraInput = document.getElementById('cameraInput');
+      const preview = document.getElementById('preview');
+
+      cameraInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+  </body>
+</html>
